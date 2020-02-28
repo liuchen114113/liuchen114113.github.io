@@ -1,7 +1,7 @@
 'use strict'
 
 // 缓存
-var LOCALSTORAGE = (function() {
+var LOCALSTORAGE = (function () {
   var storage = window.localStorage
   var expire = 3 * 60 * 60 * 1000 // 默认过期时间3小时
 
@@ -45,7 +45,7 @@ var LOCALSTORAGE = (function() {
     }
   }
 
-  function remove() {}
+  function remove() { }
 
   return {
     get: get,
@@ -107,18 +107,18 @@ var IMG_ARRAY = {
   qing: 'qingtian'
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   // 天气接口
   getWeath().then(resp => {
     if (resp) {
-      var city_name = resp.city || '上海' // 默认上海
+      var city_name = resp.city || '北京' // 默认北京
       var today = (resp.data && resp.data[0]) || {}
       var wea_img = today.wea_img || 'qingtian' // 默认晴天图标
-      var wea = today.wea // 当前天气
-      var tem = today.tem // 当前温度
+      var wea = today.wea || '' // 当前天气
+      var tem = today.tem || '' // 当前温度
 
       $('#city-name').text(city_name)
-      $('#weather-detail').text(`${wea}/${tem}`)
+      wea && tem && $('#weather-detail').text(`${wea}/${tem}`)
       $('#weather-img').html(
         `<svg class="icon weather" aria-hidden="true">
             <use xlink:href="#icon-${IMG_ARRAY[wea_img] || 'qingtian'}"></use>
@@ -128,7 +128,7 @@ $(document).ready(function() {
   })
 
   // 图片预览
-  $('.post-entry > img').each(function(k, v) {
+  $('.post-entry > img').each(function (k, v) {
     var src = $(v)[0].src
     var title = $(v)[0].title
     $(v).after(
@@ -144,12 +144,12 @@ $(document).ready(function() {
   })
 
   // 左侧滑块
-  $(document).on('click', '.toggle-icon', function() {
+  $(document).on('click', '.toggle-icon', function () {
     $('#card-wrap').toggle('1000')
   })
 
   // 分享
-  $(document).on('click', '.share', function(e) {
+  $(document).on('click', '.share', function (e) {
     var that = $(this)
     $().share({
       url: `${location.origin}${that.data('url')}` || location.href,

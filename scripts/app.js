@@ -1,4 +1,4 @@
-define(['jquery', 'hodgepodge', 'valine', 'fancybox', 'confirm', 'iconfont', 'share'], function(
+define(['jquery', 'hodgepodge', 'valine', 'fancybox', 'confirm', 'iconfont', 'share'], function (
   $,
   $H,
   valine
@@ -28,13 +28,13 @@ define(['jquery', 'hodgepodge', 'valine', 'fancybox', 'confirm', 'iconfont', 'sh
     if (width < 960) {
       window.document.write(
         '<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' +
-          appid +
-          '&conf=' +
-          conf +
-          '"></script>'
+        appid +
+        '&conf=' +
+        conf +
+        '"></script>'
       )
     } else {
-      loadJs('https://changyan.sohu.com/upload/changyan.js', false, function() {
+      loadJs('https://changyan.sohu.com/upload/changyan.js', false, function () {
         window.changyan.api.config({ appid: appid, conf: conf })
       })
     }
@@ -58,10 +58,10 @@ define(['jquery', 'hodgepodge', 'valine', 'fancybox', 'confirm', 'iconfont', 'sh
   }
 
   // bind events
-  $(document).ready(function() {
+  $(document).ready(function () {
     $H.WEATH.getWeath().then(resp => {
       if (resp) {
-        var city_name = resp.city || '上海' // 默认上海
+        var city_name = resp.city || '北京' // 默认北京
         var today = (resp.data && resp.data[0]) || {}
         var wea_img = today.wea_img || 'qingtian' // 默认晴天图标
         var wea = today.wea // 当前天气
@@ -78,7 +78,7 @@ define(['jquery', 'hodgepodge', 'valine', 'fancybox', 'confirm', 'iconfont', 'sh
     })
 
     // 图片预览
-    $('.post-entry > img').each(function(k, v) {
+    $('.post-entry > img').each(function (k, v) {
       var src = $(v)[0].src
       var title = $(v)[0].title
       $(v).after(
@@ -91,12 +91,12 @@ define(['jquery', 'hodgepodge', 'valine', 'fancybox', 'confirm', 'iconfont', 'sh
     })
 
     // 左侧滑块
-    $(document).on('click', '.toggle-icon', function() {
+    $(document).on('click', '.toggle-icon', function () {
       $('#card-wrap').toggle('1000')
     })
 
     // 分享
-    $(document).on('click', '.share', function(e) {
+    $(document).on('click', '.share', function (e) {
       var that = $(this)
       $().share({
         url: `${location.origin}${that.data('url')}` || location.href,
@@ -106,12 +106,12 @@ define(['jquery', 'hodgepodge', 'valine', 'fancybox', 'confirm', 'iconfont', 'sh
     })
 
     // 咖啡
-    $(document).on('click', '#reward-button', function(e) {
+    $(document).on('click', '#reward-button', function (e) {
       $('#qr').toggle('1000')
     })
 
     // 顶部滚动进度条
-    $(window).scroll(function(e) {
+    $(window).scroll(function (e) {
       var pageHeight = document.body.scrollHeight || document.documentElement.scrollHeight // 页面总高度
       var windowHeight = document.documentElement.clientHeight || document.body.clientHeight // 浏览器视口高度
       var scrollAvail = pageHeight - windowHeight // 可滚动的高度
@@ -121,7 +121,7 @@ define(['jquery', 'hodgepodge', 'valine', 'fancybox', 'confirm', 'iconfont', 'sh
     })
 
     // fiexed menu
-    $(document).on('click', '#fixed-menu', function() {
+    $(document).on('click', '#fixed-menu', function () {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'

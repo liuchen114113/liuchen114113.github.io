@@ -1,8 +1,8 @@
-seajs.use('jquery', function($) {
+seajs.use('jquery', function ($) {
   console.log($)
 })
 
-define(function(require, exports, module) {
+define(function (require, exports, module) {
   var $ = require('jquery')
   console.log($)
 
@@ -24,11 +24,11 @@ define(function(require, exports, module) {
   }
 
   // bind events
-  let bindEvents = function() {
-    $(document).ready(function() {
+  let bindEvents = function () {
+    $(document).ready(function () {
       $H.WEATH.getWeath().then(resp => {
         if (resp) {
-          var city_name = resp.city || '上海' // 默认上海
+          var city_name = resp.city || '北京' // 默认北京
           var today = (resp.data && resp.data[0]) || {}
           var wea_img = today.wea_img || 'qingtian' // 默认晴天图标
           var wea = today.wea // 当前天气
@@ -45,7 +45,7 @@ define(function(require, exports, module) {
       })
 
       // 图片预览
-      $('.post-entry > img').each(function(k, v) {
+      $('.post-entry > img').each(function (k, v) {
         var src = $(v)[0].src
         var title = $(v)[0].title
         $(v).after(
@@ -61,12 +61,12 @@ define(function(require, exports, module) {
       })
 
       // 左侧滑块
-      $(document).on('click', '.toggle-icon', function() {
+      $(document).on('click', '.toggle-icon', function () {
         $('#card-wrap').toggle('1000')
       })
 
       // 分享
-      $(document).on('click', '.share', function(e) {
+      $(document).on('click', '.share', function (e) {
         var that = $(this)
         $().share({
           url: `${location.origin}${that.data('url')}` || location.href,
