@@ -1,16 +1,19 @@
 /**
- * 工具模块
+ * 大杂烩模块
  */
-define('util', [], function() {
+define('hodgepodge', [], function() {
   'use strict'
 
+  var WEATH_KEY = 'WEATH'
   var STORAGE_INSTANCE = undefined
-  var DEFAULT_EXPIRE = 3 * 60 * 60 * 1000 // 默认过期时间3小时
 
   /**
    * 缓存模块
    */
   var STORAGE = (function() {
+    // 默认过期时间3小时
+    var expire = 3 * 60 * 60 * 1000
+
     function getInstance(type) {
       if (type === 'session' && STORAGE_INSTANCE !== window.sessionStorage) {
         STORAGE_INSTANCE = window.sessionStorage
@@ -37,26 +40,25 @@ define('util', [], function() {
           }
         }
       } catch (e) {
-        console.warn('key', e)
+        console.warn(e)
         value = null
       }
 
       return value
     }
 
-    function set(key, value, expire) {
+    function set(key, value) {
       value = value || {}
       key = key && key.toLocaleUpperCase()
 
       if (value) {
         var now = getNow()
         value.setTime = now
-        value.expireTime = now + (expire || DEFAULT_EXPIRE)
+        value.expireTime = now + expire
 
         try {
           value = JSON.stringify(value)
         } catch (e) {
-          console.warn('key', e)
           value = ''
         }
 
@@ -77,31 +79,47 @@ define('util', [], function() {
   })()
 
   /**
-   * 消抖
-   * 当调用函数n秒后，才会执行该动作，若在这n秒内又调用该函数则将取消前一次并重新计算执行时间
-   * @param {*} fn
-   * @param {*} delay
+   * 天气模块
    */
-  function debounce(fn, delay) {
-    let _this = this,
-      timer = null
+  var WEATH = (function() {
+    function getWeath() {
+      var weathData = STORAGE.getInstance().get(WEATH_KEY)
 
-    return function(e) {
-      if (timer) {
-        clearTimeout(timer)
-        timer = setTimeout(function() {
-          fn.call(_this, e.target.value)
-        }, delay)
+      if (weathData) {
+        return Promise.resolve(weathData)
       } else {
-        timer = setTimeout(function() {
-          fn.call(_this, e.target.value)
-        }, delay)
+        return new Promise((resolve, reject) => {
+          fetch('https://www.tianqiapi.com/api/').then(
+            data => {
+              if (data.ok) {
+                data.json().then(resp => {
+                  console.log(resp)
+                  if (resp) {
+                    STORAGE.getInstance().set(WEATH_KEY, resp)
+                    return resolve(resp)
+                  } else {
+                    return reject()
+                  }
+                })
+              } else {
+                return reject()
+              }
+            },
+            e => {
+              return reject(e)
+            }
+          )
+        })
       }
     }
-  }
+
+    return {
+      getWeath: getWeath
+    }
+  })()
 
   return {
-    STORAGE: STORAGE,
-    debounce: debounce
+    WEATH: WEATH,
+    STORAGE: STORAGE
   }
 })

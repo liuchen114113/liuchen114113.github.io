@@ -1,6 +1,3 @@
-/**
- * 分享模块
- */
 define(['jquery', 'confirm'], function($) {
   'use strict'
 
@@ -11,7 +8,8 @@ define(['jquery', 'confirm'], function($) {
       'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={{URL}}&title={{TITLE}}&desc={{DESCRIPTION}}&summary={{SUMMARY}}&site={{SOURCE}}&pics={{IMAGE}}',
     QQ:
       'http://connect.qq.com/widget/shareqq/index.html?url={{URL}}&title={{TITLE}}&source={{SOURCE}}&desc={{DESCRIPTION}}&pics={{IMAGE}}',
-    weibo: 'https://service.weibo.com/share/share.php?url={{URL}}&title={{TITLE}}&pic={{IMAGE}}&appkey={{WEIBOKEY}}',
+    weibo:
+      'https://service.weibo.com/share/share.php?url={{URL}}&title={{TITLE}}&pic={{IMAGE}}&appkey={{WEIBOKEY}}',
     weixin: 'javascript:;',
     douban:
       'http://shuo.douban.com/!service/share?href={{URL}}&name={{TITLE}}&text={{DESCRIPTION}}&image={{IMAGE}}&starid=0&aid=0&style=11',
@@ -58,7 +56,10 @@ define(['jquery', 'confirm'], function($) {
     var site_temp = ''
     options.sites.map(function(v) {
       site_temp += `<a href="${handleHref(v, options)}" target="_blank">
-                      <span class="iconfont icon-${v}"></span> 
+                      <span>
+                        <svg class="icon font" aria-hidden="true">
+                          <use xlink:href="#icon-${v}"></use>
+                        </svg></span>
                     </a>`
     })
 
@@ -71,7 +72,6 @@ define(['jquery', 'confirm'], function($) {
       useBootstrap: false,
       boxWidth: '15rem',
       escapeKey: 'true',
-      animation: 'rotateYR',
       content: content,
       buttons: {
         close: {
