@@ -72,7 +72,7 @@
       Home
     </a>
     
-    <a href="/archives" class="current">
+    <a href="/archives" class>
       Archives
     </a>
     
@@ -99,111 +99,136 @@
         </div>
       </div>
       <div class="content">
-        <div class="archives">
-    
-    
-
-
-
-
-
-
-<section class="wrap">
-    <div class="meta">
-        <a href="/archives/2020" class="archive-meta">
-            2020
-        </a>
+        <article class="post-entry">
+    <div class="header">
+      <div class="title">three.js和mapbox的融合</div>
+        
+        <div class="meta">
+        <span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fenzu4"/>
+          </svg>
+          2020/02/19
+        </span>
+        <span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fenzu14"/>
+          </svg>
+          <span>
+            
+              
+            
+          </span>
+        </span>
+        <span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fenzu15"/>
+          </svg>
+          <span>
+            
+              
+            
+          </span>
+        </span>
+        <span class="leancloud-visitors" id="https://liuchen114113.github.io/2020/02/19/ThreeBox/" data-flag-title="three.js和mapbox的融合">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fenzu6"/>
+          </svg>
+          <span class="leancloud-visitors-count"></span>
+        </span>
+        </div>
+        
+         
+      <div>
+      </div>
     </div>
-    <div class="year">
-        
-        <article class="item">
-
-            <!-- <div class="photo">
-                <img src="https://blog.zhangruipeng.me/hexo-theme-icarus/gallery/thumbnails/flower.jpg" alt="">
-            </div> -->
-            <div class="content">
-                <div class="title">
-                    <a href="/2020/02/19/ThreeBox/">
-                        three.js和mapbox的融合
-                    </a>
-                </div>
-                <div class="date">
-                    <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-calendar"/>
-                    </svg>
-                    2020-02-19
-                </div>
-            </div>
-        </article>
-        
-
-
-        <article class="item">
-
-            <!-- <div class="photo">
-                <img src="https://blog.zhangruipeng.me/hexo-theme-icarus/gallery/thumbnails/flower.jpg" alt="">
-            </div> -->
-            <div class="content">
-                <div class="title">
-                    <a href="/2020/02/01/前端面试知识点梳理/">
-                        前端知识点梳理
-                    </a>
-                </div>
-                <div class="date">
-                    <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-calendar"/>
-                    </svg>
-                    2020-02-01
-                </div>
-            </div>
-        </article>
-        
-
-
-
-</div>
-</section>
-
-
-<section class="wrap">
-    <div class="meta">
-        <a href="/archives/2019" class="archive-meta">
-            2019
-        </a>
-    </div>
-    <div class="year">
-        
-        <article class="item">
-
-            <!-- <div class="photo">
-                <img src="https://blog.zhangruipeng.me/hexo-theme-icarus/gallery/thumbnails/flower.jpg" alt="">
-            </div> -->
-            <div class="content">
-                <div class="title">
-                    <a href="/2019/08/20/HEXO搭建个人博客/">
-                        HEXO搭建个人博客
-                    </a>
-                </div>
-                <div class="date">
-                    <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-calendar"/>
-                    </svg>
-                    2019-08-20
-                </div>
-            </div>
-        </article>
-        
-        
-    </div>
-</section>
+    <h2 id="经纬度转墨卡托投影公式"><a href="#经纬度转墨卡托投影公式" class="headerlink" title="经纬度转墨卡托投影公式"></a>经纬度转墨卡托投影公式</h2><p>（地理坐标系的经纬度转投影坐标系的米，推导公式可查阅相关资料）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">const WORLD_SIZE = 512;</span><br><span class="line">const MERCATOR_A = 6378137.0;</span><br><span class="line"></span><br><span class="line">//墨卡托投影相关系数</span><br><span class="line">const ThreeboxConstants =  &#123;</span><br><span class="line">    WORLD_SIZE: WORLD_SIZE,</span><br><span class="line">    PROJECTION_WORLD_SIZE: WORLD_SIZE / (MERCATOR_A * Math.PI) / 2,</span><br><span class="line">    MERCATOR_A: MERCATOR_A,</span><br><span class="line">    DEG2RAD: Math.PI / 180,</span><br><span class="line">    RAD2DEG: 180 / Math.PI,</span><br><span class="line">    EARTH_CIRCUMFERENCE: 40075000 // 米</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//世界坐标系和投影坐标系的比例转换（每个像素代表的墨卡托投影系下的长度值）</span><br><span class="line">const projectedUnitsPerMeter = function (latitude) &#123;</span><br><span class="line">     return Math.abs(ThreeboxConstants.WORLD_SIZE * (1 / Math.cos(latitude * Math.PI / 180)) / ThreeboxConstants.EARTH_CIRCUMFERENCE);</span><br><span class="line">&#125;</span><br><span class="line">var projected = [</span><br><span class="line">    -ThreeboxConstants.MERCATOR_A * coords[0] * ThreeboxConstants.DEG2RAD * ThreeboxConstants.PROJECTION_WORLD_SIZE,</span><br><span class="line">    -ThreeboxConstants.MERCATOR_A * Math.log(Math.tan((Math.PI * 0.25) + (0.5 * coords[1] * ThreeboxConstants.DEG2RAD))) * ThreeboxConstants.PROJECTION_WORLD_SIZE</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">var pixelsPerMeter = projectedUnitsPerMeter(coords[1]);</span><br><span class="line"></span><br><span class="line">//z</span><br><span class="line">var height = coords[2] || 0;</span><br><span class="line">projected.push(height * pixelsPerMeter);</span><br><span class="line"></span><br><span class="line">var result = new THREE.Vector3(projected[0], projected[1], projected[2]);</span><br><span class="line"></span><br><span class="line">return result;</span><br></pre></td></tr></table></figure>
 
   
 
-  <div class="paginator">
-        <span class="page-number current">1</span>
-  </div>
+  <!---->
+
+  <!--</div>-->
+
+  <!--<div class="post-copyright">-->
+    <!--<div class="auth">-->
+      <!--本文作者：<a href="https://liuchen114113.github.io">liuchenchen</a>-->
+    <!--</div>-->
+    <!--<div class="link">-->
+      <!--永久链接：<a href="https://liuchen114113.github.io/2020/02/19/ThreeBox/">https://liuchen114113.github.io/2020/02/19/ThreeBox/</a>-->
+    <!--</div>-->
+    <!--<div class="declare">-->
+      <!--版权声明：本文首发于<a href="https://liuchen114113.github.io">liuchenchen</a>的博客，转载请注明出处！-->
+    <!--</div>-->
+  <!--</div>-->
+
+    <!-- Comments -->
+    <div class="comments" id="zss">
+        
+            <br><br>
+            
+            <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = '哎哟喂';
+    var disqus_config = function () {
+      this.page.url = 'https://liuchen114113.github.io/2020/02/19/ThreeBox/';
+      this.page.identifier = '/2020/02/19/ThreeBox/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></noscript>
 </div>
 
+<div id="gitment_title" class="gitment_title"></div>
+<div id="container" style="display:none"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  const myTheme = {
+    render(state, instance) {
+      const container = document.createElement('div');
+      container.lang = "en-US";
+      container.className = 'gitment-container gitment-root-container';
+      container.appendChild(instance.renderHeader(state, instance));
+      container.appendChild(instance.renderEditor(state, instance));
+      container.appendChild(instance.renderComments(state, instance));
+      container.appendChild(instance.renderFooter(state, instance));
+      return container;
+    }
+  }
+  function showGitment() {
+    $("#gitment_title").attr("style", "display:none");
+    $("#aiyowei").attr("style", "").addClass("gitment_container");
+    var gitment = new Gitment({
+      id: decodeURI(window.location.pathname),
+      theme: myTheme,
+      owner: 'liuchen114113',
+      repo: 'liuchen114113.github.io/',
+      oauth: {
+        client_id: '5efaeab243c9580dea8e',
+        client_secret: '017d390a8c804b69f4aeda229cca6a737e7346f9'
+      }
+    });
+    gitment.render('aiyowei');
+  }
+  showGitment();
+</script>
+
+        
+    </div>
+
+  <!--<div id="comment"></div>-->
+
+</article>
       </div>
       <footer>
         <div class="copyright">
@@ -246,7 +271,16 @@
           </a>
            
         </div>
-        
+         
+        <div class="toc-widget">
+          <div class="title">
+            <span>Toc</span>
+          </div>
+          <div class="post-toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#经纬度转墨卡托投影公式"><span class="toc-text">经纬度转墨卡托投影公式</span></a></li></ol>
+          </div>
+        </div>
+         
         <div class="category-widget">
           <div class="title">
             <span>Categories</span>
