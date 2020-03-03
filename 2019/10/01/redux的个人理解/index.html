@@ -72,7 +72,7 @@
       Home
     </a>
     
-    <a href="/archives" class="current">
+    <a href="/archives" class>
       Archives
     </a>
     
@@ -99,54 +99,145 @@
         </div>
       </div>
       <div class="content">
-        <div class="archives">
-    
-    
-
-
-
-
-
-
-<section class="wrap">
-    <div class="meta">
-        <a href="/archives/2019" class="archive-meta">
-            2019
-        </a>
+        <article class="post-entry">
+    <div class="header">
+      <div class="title">redux的个人理解</div>
+        
+        <div class="meta">
+        <span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fenzu4"/>
+          </svg>
+          2019/10/01
+        </span>
+        <span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fenzu14"/>
+          </svg>
+          <span>
+            
+              
+            
+          </span>
+        </span>
+        <span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fenzu15"/>
+          </svg>
+          <span>
+            
+              
+            
+          </span>
+        </span>
+        <span class="leancloud-visitors" id="https://liuchen114113.github.io/2019/10/01/redux的个人理解/" data-flag-title="redux的个人理解">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fenzu6"/>
+          </svg>
+          <span class="leancloud-visitors-count"></span>
+        </span>
+        </div>
+        
+         
+      <div>
+      </div>
     </div>
-    <div class="year">
-        
-        <article class="item">
+    <h2 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h2><ul>
+<li>视图与状态是一一对应的。</li>
+<li>所有的状态，保存在一个对象里面。</li>
+</ul>
+<h2 id="核心原理"><a href="#核心原理" class="headerlink" title="核心原理"></a>核心原理</h2><ul>
+<li>所有的状态统一挂载到全局对象store上去</li>
+<li>每一次状态的改变都应该是通过dispatch下发action来触发，action传入对应的reducer中，reducer返回一个新的state并更新store中存放的state</li>
+<li>通过subscribe订阅对store的监听函数，这些监听通过dispatch发起后依次执行</li>
+<li>可以通过中间件来对提交的dispatch重写</li>
+</ul>
 
-            <!-- <div class="photo">
-                <img src="https://blog.zhangruipeng.me/hexo-theme-icarus/gallery/thumbnails/flower.jpg" alt="">
-            </div> -->
-            <div class="content">
-                <div class="title">
-                    <a href="/2019/08/20/HEXO搭建个人博客/">
-                        HEXO搭建个人博客
-                    </a>
-                </div>
-                <div class="date">
-                    <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-calendar"/>
-                    </svg>
-                    2019-08-20
-                </div>
-            </div>
-        </article>
-        
-        
-    </div>
-</section>
 
   
 
-  <div class="paginator">
-        <span class="page-number current">1</span>
-  </div>
+  <!---->
+
+  <!--</div>-->
+
+  <!--<div class="post-copyright">-->
+    <!--<div class="auth">-->
+      <!--本文作者：<a href="https://liuchen114113.github.io">liuchenchen</a>-->
+    <!--</div>-->
+    <!--<div class="link">-->
+      <!--永久链接：<a href="https://liuchen114113.github.io/2019/10/01/redux的个人理解/">https://liuchen114113.github.io/2019/10/01/redux的个人理解/</a>-->
+    <!--</div>-->
+    <!--<div class="declare">-->
+      <!--版权声明：本文首发于<a href="https://liuchen114113.github.io">liuchenchen</a>的博客，转载请注明出处！-->
+    <!--</div>-->
+  <!--</div>-->
+
+    <!-- Comments -->
+    <div class="comments" id="zss">
+        
+            <br><br>
+            
+            <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = '哎哟喂';
+    var disqus_config = function () {
+      this.page.url = 'https://liuchen114113.github.io/2019/10/01/redux的个人理解/';
+      this.page.identifier = '/2019/10/01/redux的个人理解/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></noscript>
 </div>
 
+<div id="gitment_title" class="gitment_title"></div>
+<div id="container" style="display:none"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  const myTheme = {
+    render(state, instance) {
+      const container = document.createElement('div');
+      container.lang = "en-US";
+      container.className = 'gitment-container gitment-root-container';
+      container.appendChild(instance.renderHeader(state, instance));
+      container.appendChild(instance.renderEditor(state, instance));
+      container.appendChild(instance.renderComments(state, instance));
+      container.appendChild(instance.renderFooter(state, instance));
+      return container;
+    }
+  }
+  function showGitment() {
+    $("#gitment_title").attr("style", "display:none");
+    $("#aiyowei").attr("style", "").addClass("gitment_container");
+    var gitment = new Gitment({
+      id: decodeURI(window.location.pathname),
+      theme: myTheme,
+      owner: 'liuchen114113',
+      repo: 'liuchen114113.github.io/',
+      oauth: {
+        client_id: '5efaeab243c9580dea8e',
+        client_secret: '017d390a8c804b69f4aeda229cca6a737e7346f9'
+      }
+    });
+    gitment.render('aiyowei');
+  }
+  showGitment();
+</script>
+
+        
+    </div>
+
+  <!--<div id="comment"></div>-->
+
+</article>
       </div>
       <footer>
         <div class="copyright">
@@ -189,7 +280,16 @@
           </a>
            
         </div>
-        
+         
+        <div class="toc-widget">
+          <div class="title">
+            <span>Toc</span>
+          </div>
+          <div class="post-toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设计思想"><span class="toc-text">设计思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#核心原理"><span class="toc-text">核心原理</span></a></li></ol>
+          </div>
+        </div>
+         
         <div class="category-widget">
           <div class="title">
             <span>Categories</span>
